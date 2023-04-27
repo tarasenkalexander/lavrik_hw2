@@ -1,0 +1,20 @@
+07:01:13|::1|/projects/lavrik/my_hw2/add.php|http://localhost/projects/lavrik/my_hw2/index.php|entered on add page
+07:01:15|::1|/projects/lavrik/my_hw2/add.php|http://localhost/projects/lavrik/my_hw2/add.php|added an article
+07:01:17|::1|/projects/lavrik/my_hw2/index.php|http://localhost/projects/lavrik/my_hw2/add.php|
+07:01:19|::1|/projects/lavrik/my_hw2/index.php|http://localhost/projects/lavrik/my_hw2/add.php|
+07:01:32|::1|/projects/lavrik/my_hw2/index.php|http://localhost/projects/lavrik/my_hw2/add.php|
+08:01:45|::1|/projects/lavrik/my_hw2/|http://localhost/projects/lavrik/|
+08:01:50|::1|/projects/lavrik/my_hw2/|http://localhost/projects/lavrik/|
+08:01:51|::1|/projects/lavrik/my_hw2/|http://localhost/projects/lavrik/|
+08:01:57|::1|/projects/lavrik/my_hw2/add.php|http://localhost/projects/lavrik/my_hw2/|entered on add page
+08:01:59|::1|/projects/lavrik/my_hw2/add.php|http://localhost/projects/lavrik/my_hw2/add.php|added an article
+08:01:00|::1|/projects/lavrik/my_hw2/index.php|http://localhost/projects/lavrik/my_hw2/add.php|
+08:01:03|::1|/projects/lavrik/my_hw2/||
+08:01:16|::1|/projects/lavrik/my_hw2/|http://localhost/projects/lavrik/|
+08:01:18|::1|/projects/lavrik/my_hw2/article.php?id=14|http://localhost/projects/lavrik/my_hw2/|
+08:01:19|::1|/projects/lavrik/my_hw2/delete.php?id=14|http://localhost/projects/lavrik/my_hw2/article.php?id=14|deleted article
+08:01:21|::1|/projects/lavrik/my_hw2/index.php|http://localhost/projects/lavrik/my_hw2/delete.php?id=14|
+08:01:45|::1|/projects/lavrik/my_hw2/index.php|http://localhost/projects/lavrik/my_hw2/delete.php?id=14|
+09:01:18|::1|/projects/lavrik/my_hw2/add.php|http://localhost/projects/lavrik/my_hw2/index.php|entered on add page
+09:01:24|::1|/projects/lavrik/my_hw2/add.php|http://localhost/projects/lavrik/my_hw2/add.php|added an article
+09:01:26|::1|/projects/lavrik/my_hw2/index.php|http://localhost/projects/lavrik/my_hw2/add.php|
