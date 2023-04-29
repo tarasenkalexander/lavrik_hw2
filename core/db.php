@@ -1,5 +1,5 @@
 <?php
-function getDatabaseConnection()
+function getDatabaseConnection() : PDO
 {
     static $connection;
     if (!isset($connection)) {
@@ -10,7 +10,7 @@ function getDatabaseConnection()
     return $connection;
 }
 
-function runSqlQuery($sql, $params = [])
+function runSqlQuery($sql, $params = []) : PDOStatement|false
 {
     $connection = getDatabaseConnection();
     $query = $connection->prepare($sql);
@@ -23,7 +23,8 @@ function getErrors(PDOStatement $query)
 {
     if($query->errorInfo()[0] !== PDO::ERR_NONE)
     {
-        print_r($query->errorInfo());
+        $errors = $query->errorInfo();
+        include("view/errors/v_common_error.php");
         exit();
     }
 

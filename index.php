@@ -1,17 +1,33 @@
 <?php
-$path = $_GET['c'] ?? 'index';
+include 'core/functions.php';
+include 'model/article/articleDbConnection.php';
+include 'model/article/article.php';
+include 'model/category/categoryDbConnection.php';
+include 'core/logging.php';
 
+$controllerName = $_GET['c'] ?? 'index';
+$path = "controller/$controllerName.php";
+if(checkController($controllerName) && file_exists($path))
+{
+    include($path);
+}
+else{
+    error404();
+}
 
-include("controller/$path.php");
 
 /**
- * Добавить базовую проверку переменной  path через file_exist и preg_match в корневом index.php
- * Где именно должна быть проверка title и content?
  * Разобраться в namespace и папках, как их правильно указывать
- * Как именно работают include? Откуда их нужно подключать, из места использования функции или 
- * из места объявления?
- * Добавить страницы с ошибками (как именно они обрабатываются, что туда шлётся?)
- * Почему не отображается """ имя и можно ли вставить какой-нибудь вред?
- * Пересмотреть видосы Лаврика, что ещё нужно добавить? (Писать заметки от этом во время просмотра)
- * Решить баг, почему не отображается имя через пробел после нажатия edit
+ * Как именно работают include? Откуда их нужно подключать, из места использования функции или из места объявления?
+ * Можно ли объединить код добавления статьи в add и edit?
+ * Что быстрее - UPDATE или ADD + DELETE?
+ */
+
+ /*
+ после разбора дз:
+ 1. $query->execute может вернуть false, не только PDOStatement. Это тоже нужно обрабатывать, 
+ но как - хороший вопрос.
+ Можно через исключения, но это в перспективе. Прямо сейчас можно при каждом execute поставить if, который 
+ будет выбрасывать ошибку в common_error с подходящим сообщением. Но спорно, всё равно в перспективе всё менять
+ под исключения 
  */

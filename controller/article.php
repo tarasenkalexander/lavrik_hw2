@@ -1,14 +1,17 @@
 <?php
 declare (strict_types = 1);
-include 'model/article/articleDbConnection.php';
-include 'model/category/categoryDbConnection.php';
-include 'core/logging.php';
 
-$id = (int) ($_GET['id'] ?? '');
+if(!checkId($_GET['id']))
+{
+    error404();
+}
+else {
+    $id = (int)$_GET['id'];
+}
 
-$post = getArticle($id);
+$article = getArticle($id);
 $categories = getCategories();
-$hasPost = ($post !== null && $post != false);
+$hasPost = ($article !== null && $article != false);
 
 logStandardInfo();
 if($hasPost)
@@ -16,5 +19,5 @@ if($hasPost)
     include('view/v_article.php');
 }
 else{
-    include('view/v_404.php');
+    error404();
 }

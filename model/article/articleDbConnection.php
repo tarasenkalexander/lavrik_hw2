@@ -37,14 +37,12 @@ function removeArticle(int $id): bool
     return getErrors($query);
 }
 
-function editArticle(int $id, string $newTitle, string $newContent,
-    string $categoryId = DEFAULT_CATEGORY_ID): bool {
+function editArticle(int $id, array $newArticle): bool {
 
     $sql = "UPDATE articles
-            SET title=:title, content=:content, category_id=:category
-            WHERE id=:id";
-    $query = runSqlQuery($sql, ['id' => $id, 'title' => $newTitle,
-        'content' => $newContent, 'category' => $categoryId]);
+            SET title=:title, content=:content, category_id=:category_id
+            WHERE id=$id";
+    $query = runSqlQuery($sql, $newArticle);
 
     return getErrors($query);
 }

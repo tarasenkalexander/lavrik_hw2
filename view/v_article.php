@@ -1,9 +1,9 @@
 <div class="content">
     <div class="article">
-        <h1><?=$post['title']?></h1>
-        <div><?=$post['content']?></div>
+        <h1><?=$article['title']?></h1>
+        <div><?=$article['content']?></div>
         <div>
-            <p>Category: <?=$categories[$post['category_id']]['name']?></p>
+            <p>Category: <?=$categories[$article['category_id']]['name']?></p>
         </div>
         <hr>
         <a href="index.php?c=delete&id=<?=$id?>">Remove</a>

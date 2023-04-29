@@ -1,6 +1,5 @@
 <?php
 declare (strict_types = 1);
-include_once 'functions.php';
 
 function logInfo(string $message): bool
 {
@@ -13,4 +12,18 @@ function logInfo(string $message): bool
 function logStandardInfo(string $additionalInformation = ""): bool
 {
     return logInfo(getLogMessage($additionalInformation));
+}
+
+function getLogMessage(string $additionalInformation = ""): string
+{
+    $time = date('h:m:s');
+    $userIP = $_SERVER['REMOTE_ADDR'];
+    $URL = $_SERVER['REQUEST_URI'];
+    if (isset($_SERVER['HTTP_REFERER'])) {
+        $referer = $_SERVER['HTTP_REFERER'];
+    } else {
+        $referer = '';
+    }
+
+    return "$time|$userIP|$URL|$referer|$additionalInformation" . PHP_EOL;
 }

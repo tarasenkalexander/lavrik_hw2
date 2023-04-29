@@ -1,11 +1,15 @@
 <?php
 declare (strict_types = 1);
-include 'model/article/articleDbConnection.php';
-include 'core/logging.php';
 
 $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $id = intval($_GET['id']);
+    if(!checkId($_GET['id']))
+    {
+        error404();
+    }
+    else {
+        $id = (int)$_GET['id'];
+    }
     if ($id <= 0) {
         $error = "Wrong id sent";
     } else {

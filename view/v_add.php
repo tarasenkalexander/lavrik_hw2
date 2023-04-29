@@ -13,9 +13,9 @@
 		<button>Add</button>
 	</form>
 <?php else: ?>
-	<?=$messageToUser?><br><br>
+	<?=$messageToUser?><br>
 	<?php foreach($errors as $error):?>
-		<p><?=$error?></p><br>
+		<p><?=$error?></p>
 	<?php endforeach;?>
 	<a href="index.php?c=add">Add one more</a>
 <?php endif?>

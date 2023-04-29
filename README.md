@@ -1,1 +1,0 @@
-# lavrik_hw2

@@ -1,44 +1,53 @@
 <?php
 declare (strict_types = 1);
-include 'core/functions.php';
-include 'model/article/articleDbConnection.php';
-include 'model/category/categoryDbConnection.php';
-include 'core/logging.php';
 
 $categories = getCategories();
+$articleElements = ['title' => '', 'content' => '', 'category_id' => ''];
 $id = '';
-$title = '';
-$content = ''; 
 $messageToUser = '';
+$errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    $id = (int) $_GET['id'];
+    if(!checkId($_GET['id']))
+    {
+        error404();
+    }
+    else {
+        $id = (int)$_GET['id'];
+    }
     $article = getArticle($id);
     if ($article !== null) {
-        $title = $article['title'];
-        $content = $article['content'];
-        $categoryIdInput = $article['category_id'];
+        $articleElements['title'] = $article['title'];
+        $articleElements['content'] = $article['content'];
+        $articleElements['category_id'] = $article['category_id'];
     } else {
         $messageToUser = 'Can\'t find the article';
     }
 
     logStandardInfo('entered to edit');
 } else {
-    $id = $_POST['id'];
-    $title = $_POST['title'];
-    $content = $_POST['content'];
-    $categoryIdOutput = $_POST['category_id'];
+    //тут не помешала бы проверка на то, есть ли такой article и имеет ли юзер к нему доступ.
+    // Но это большая ошибка, включаящая в себя то, что id я храню в hidden поле.
+    if(!checkId($_POST['id']))
+    {
+        error404();
+    }
+    else {
+        $id = (int)$_GET['id'];
+    }
+    $articleElements = getParticularElements($_POST, ['title', 'content', 'category_id']);
+    clearArticleElements($articleElements);
+    $errors = validateArticle($articleElements);
 
-    if (checkTitle($title) && checkContent($content)) {
-        if (editArticle(intval($id), $title, $content, $categoryIdOutput)) {
+    if (empty($errors)) {
+        if (editArticle($id, $articleElements)) {
             $messageToUser = 'Successfully edited!';
             logStandardInfo('edited successfully');
         } else {
-            $messageToUser = "Error wile editing!";
+            $messageToUser = "Error while editing!";
             logStandardInfo('failed editing');
         }
     } else {
-        $messageToUser = 'Can\'t edit to empty title or context';
         logStandardInfo('failed editing');
     }
 }
