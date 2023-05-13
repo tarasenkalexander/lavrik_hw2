@@ -3,7 +3,8 @@
         <h1><?=$article['title']?></h1>
         <div><?=$article['content']?></div>
         <div>
-            <p>Category: <?=$categories[$article['category_id']]['name']?></p>
+            <a href = "index.php?c=articlesByCategory&categoryId=<?=$article['category_id']?>">
+                Category: <?=$categories[$article['category_id']]['name']?></a>
         </div>
         <hr>
         <a href="index.php?c=delete&id=<?=$id?>">Remove</a>

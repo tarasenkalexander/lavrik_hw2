@@ -1,16 +1,16 @@
 <?php
-function getDatabaseConnection() : PDO
+function getDatabaseConnection(): PDO
 {
     static $connection;
     if (!isset($connection)) {
-        $connection = new PDO("mysql:host=localhost;dbname=lavrik_social_network_v2.1;charset=utf8",
-            'root', '');
+        $connection = new PDO("mysql:host=" . DB_HOST . ";dbname=". DB_NAME . ";charset=utf8",
+            DB_USER, DB_PASS);
     }
 
     return $connection;
 }
 
-function runSqlQuery($sql, $params = []) : PDOStatement|false
+function runSqlQuery($sql, $params = []): PDOStatement | false
 {
     $connection = getDatabaseConnection();
     $query = $connection->prepare($sql);
@@ -21,10 +21,9 @@ function runSqlQuery($sql, $params = []) : PDOStatement|false
 
 function getErrors(PDOStatement $query)
 {
-    if($query->errorInfo()[0] !== PDO::ERR_NONE)
-    {
+    if ($query->errorInfo()[0] !== PDO::ERR_NONE) {
         $errors = $query->errorInfo();
-        include("view/errors/v_common_error.php");
+        include "view/errors/v_common_error.php";
         exit();
     }
 

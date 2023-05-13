@@ -8,12 +8,12 @@ $messageToUser = '';
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    if(!checkId($_GET['id']))
-    {
-        error404();
-    }
-    else {
-        $id = (int)$_GET['id'];
+    if (!checkId($_GET['id'])) {
+        header($_SERVER["SERVER_PROTOCOL"] . " 404 Not Found");
+        $pageTitle = "404 Error";
+        $pageContent = template("errors/v_404");
+    } else {
+        $id = (int) $_GET['id'];
     }
     $article = getArticle($id);
     if ($article !== null) {
@@ -26,14 +26,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     logStandardInfo('entered to edit');
 } else {
-    //тут не помешала бы проверка на то, есть ли такой article и имеет ли юзер к нему доступ.
-    // Но это большая ошибка, включаящая в себя то, что id я храню в hidden поле.
-    if(!checkId($_POST['id']))
-    {
-        error404();
-    }
-    else {
-        $id = (int)$_GET['id'];
+    if (!checkId($_POST['id'])) {
+        header($_SERVER["SERVER_PROTOCOL"] . " 404 Not Found");
+        $pageTitle = "404 Error";
+        $pageContent = template("errors/v_404");
+    } else {
+        $id = (int) $_GET['id'];
     }
     $articleElements = getParticularElements($_POST, ['title', 'content', 'category_id']);
     clearArticleElements($articleElements);
@@ -52,4 +50,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     }
 }
 
-include 'view/v_edit.php';
+$pageTitle = "Edit article";
+$pageContent = template("article/v_edit", [
+    "messageToUser" => $messageToUser,
+    "articleElements" => $articleElements,
+    "categories" => $categories,
+    "id" => $id,
+    "errors" => $errors,
+]);

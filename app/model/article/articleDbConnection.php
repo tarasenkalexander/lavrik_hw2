@@ -11,7 +11,7 @@ function getArticles(): array
     return setArrayKeyWithId($resultFromDB);
 }
 
-function getArticle(int $id): array|false
+function getArticle(int $id): array | false
 {
     $sql = "SELECT * FROM articles WHERE id=:id";
     $query = runSqlQuery($sql, ['id' => $id]);
@@ -37,7 +37,8 @@ function removeArticle(int $id): bool
     return getErrors($query);
 }
 
-function editArticle(int $id, array $newArticle): bool {
+function editArticle(int $id, array $newArticle): bool
+{
 
     $sql = "UPDATE articles
             SET title=:title, content=:content, category_id=:category_id
@@ -45,4 +46,17 @@ function editArticle(int $id, array $newArticle): bool {
     $query = runSqlQuery($sql, $newArticle);
 
     return getErrors($query);
+}
+
+function getArticlesByCategory(int $category_id)
+{
+    $sql = "SELECT articles.title as title, articles.id as id
+            FROM articles
+            LEFT JOIN categories ON articles.category_id = categories.id
+            WHERE articles.category_id = :category_id;";
+
+    $query = runSqlQuery($sql, ['category_id' => $category_id]);
+    $resultFromDB = $query->fetchAll(PDO::FETCH_ASSOC);
+
+    return setArrayKeyWithId($resultFromDB);
 }

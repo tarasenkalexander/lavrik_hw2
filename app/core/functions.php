@@ -1,11 +1,8 @@
 <?php
 declare (strict_types = 1);
 include 'db.php';
-// your functions may be here
 
-/* start --- black box */
-
-function setArrayKeyWithId(array $arr) : array
+function setArrayKeyWithId(array $arr): array
 {
     $result = [];
 
@@ -21,13 +18,13 @@ function checkId(string $id): bool
     return (bool) preg_match('/^[1-9]+\d*$/', $id);
 }
 
-function getLastAddedId() : string
+function getLastAddedId(): string
 {
     $conn = getDatabaseConnection();
     return $conn->lastInsertId();
 }
 
-function getParticularElements(array $allElements, array $particularElements) : array
+function getParticularElements(array $allElements, array $particularElements): array
 {
     $result = [];
 
@@ -38,16 +35,25 @@ function getParticularElements(array $allElements, array $particularElements) : 
     return $result;
 }
 
-function checkController(string $controllerName) : bool
+function checkController(string $controllerName): bool
 {
-    return (bool)preg_match('/^[\w_-]+$/', $controllerName);
+    return (bool) preg_match('/^[\w_-]+$/', $controllerName);
 }
 
-function error404() : void
+function error404(): void
 {
     header($_SERVER["SERVER_PROTOCOL"] . " 404 Not Found");
-    include("view/errors/v_404.php");
+    include "app/view/errors/v_404.php";
     exit();
 }
 
-/* end --- black box */
+function template(string $path, array $vars = []): string
+{
+    $fullPath = "app/view/$path.php";
+    extract($vars);
+    ob_start();
+    include ($fullPath);
+    $page = ob_get_clean();
+
+    return $page;
+}

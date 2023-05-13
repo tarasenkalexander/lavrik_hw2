@@ -2,6 +2,7 @@
 declare (strict_types = 1);
 
 $messageToUser = '';
+$errors = [];
 $articleElements = [
     'title' => '',
     'content' => '',
@@ -23,4 +24,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $categories = getCategories();
 }
 
-include 'view/v_add.php';
+$pageTitle = "Edit article";
+$pageContent = template("article/v_add", [
+    "messageToUser" => $messageToUser,
+    "articleElements" => $articleElements,
+    "categories" => $categories,
+    "errors" => $errors,
+]);

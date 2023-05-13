@@ -1,0 +1,20 @@
+:root{
+    --color1:#eee;
+    --color2:#ddd;
+}
+
+.bg-main{
+    background-color: var(--color1);
+}
+
+.bg-footer{
+    background-color: var(--color2);
+}
+
+.articles {
+    background-color: var(--color1);
+}
+
+.full-size{
+    height: 100vh;
+}

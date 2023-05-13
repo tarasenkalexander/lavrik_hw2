@@ -3,12 +3,12 @@ declare (strict_types = 1);
 
 $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    if(!checkId($_GET['id']))
-    {
-        error404();
-    }
-    else {
-        $id = (int)$_GET['id'];
+    if (!checkId($_GET['id'])) {
+        header($_SERVER["SERVER_PROTOCOL"] . " 404 Not Found");
+        $pageTitle = "404 Error";
+        $pageContent = template("errors/v_404");
+    } else {
+        $id = (int) $_GET['id'];
     }
     if ($id <= 0) {
         $error = "Wrong id sent";
@@ -27,4 +27,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     logStandardInfo('entered with wrong http method');
 }
 
-include('view/v_delete.php');
+$pageTitle = "Deleted";
+$pageContent = template("article/v_delete", ["error" => $error]);

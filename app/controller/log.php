@@ -7,6 +7,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     foreach ($logInformation as $logLine) {
         $logInformationParsed[] = explode('|', $logLine);
     }
-}
 
-include ('view/v_log.php');  
+    $pageTitle = $logfileName;
+    $pageContent = template("log/v_log", [
+        "logfileName" => $logfileName,
+        "logInformationParsed" => $logInformationParsed
+    ]);
+}
