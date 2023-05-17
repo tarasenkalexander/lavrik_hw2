@@ -1,12 +1,49 @@
 <?php
+
 include ("app/init.php");
+include ("app/core/router.php");
+
+// echo $_SERVER["REQUEST_URI"];
+// echo "<br>";
+// echo BASE_URL;
+$router = new Router($_GET['querysystemurl'] ?? '');
+
+$router->addRoutes([
+    [
+        'reg' => '~/?~',
+        'controller' => 'index.php'
+    ],
+    [
+        'reg' => '~add/?~',
+        'controller' => 'add'
+    ],
+    [
+        'reg' => "~article/:num/?~",
+        'controller' => 'article',
+        'params' => ['id' => 1]
+    ],
+    [
+        'reg' => "~article/:num/edit/?~",
+        'controller' => 'edit',
+        'params' => ['id' => 1]
+    ],
+    [
+        'reg' => "~article/:num/delete/?~",
+        'controller' => 'delete',
+        'params' => ['id' => 1]
+    ]
+
+]);
 
 $pageTitle = '';
 $pageContent = '';
 
-$controllerName = $_GET['c'] ?? 'index';
+$router->dispatch();
+
+$controllerName = $router::$routingResult['controller'] ?? 'index';
 $controllerPath = "app/controller/$controllerName.php";
-if(checkController($controllerName) && file_exists($controllerPath))
+
+if(file_exists($controllerPath))
 {
     include($controllerPath);
 }
@@ -17,6 +54,14 @@ else{
 }
 
 include ("app/view/base/v_main.php");
+
+
+/**
+ * Я остановился на том, что у меня выбрасывает ошибку, когда я пытаюсь получить доступ к любой странице.
+ * Я вспомнил, что нужно задать базовый контроллер-ошибку в dispatch, но понял, что не знаю, как этот
+ * контроллер создать
+ */
+
 
 /**
  * Лаврика:

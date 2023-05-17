@@ -7,9 +7,9 @@
                 Category: <?=$categories[$article['category_id']]['name']?></a>
         </div>
         <hr>
-        <a href="index.php?c=delete&id=<?=$id?>">Remove</a>
+        <a href=<?=BASE_URL . "article/$id/delete"?>>Remove</a>
     </div>
 </div>
 <hr>
-<a href="index.php?c=edit&id=<?=$id?>">Edit article</a><br>
-<a href="index.php">Move to main page</a>
+<a href=<?=BASE_URL . "article/$id/edit"?>>Edit article</a><br>
+<a href=<?=BASE_URL . "/"?>>Move to main page</a>

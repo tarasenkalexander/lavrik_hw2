@@ -29,7 +29,7 @@
                         <h2>
                             <?=$article['title']?>
                         </h2>
-                        <a href="index.php?c=article&id=<?=$id?>">Read more</a>
+                        <a href=<?=BASE_URL . "article/$id"?>>Read more</a>
                     </div>
                 </div>
                 <?php endforeach;?>

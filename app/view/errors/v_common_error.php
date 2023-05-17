@@ -2,4 +2,4 @@
 <p><?=$error;?></p>
 <?php endforeach; ?>
 <hr>
-<a href="index.php">Move to Main menu</a>
+<a href=<?=BASE_URL . "/"?>>Move to Main menu</a>

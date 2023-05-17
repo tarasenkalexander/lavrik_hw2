@@ -17,7 +17,7 @@
 	<?php foreach($errors as $error):?>
 		<p><?=$error?></p>
 	<?php endforeach;?>
-	<a href="index.php?c=add">Add one more</a>
+	<a href=<?=BASE_URL . "add"?>>Add one more</a>
 <?php endif?>
 <hr>
-<a href="index.php">Move to main page</a>
+<a href=<?=BASE_URL . "/"?>>Move to main page</a>

@@ -6,6 +6,8 @@ include 'model/article/article.php';
 include 'model/category/categoryDbConnection.php';
 include 'core/logging.php';
 
+const BASE_URL = "/ma_projects/my_hw2/lavrik_hw2-1/";
+
 const DB_HOST = 'localhost';
 const DB_NAME = 'lavrik_social_network_v2';
 const DB_USER = 'root';

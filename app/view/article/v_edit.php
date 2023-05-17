@@ -18,7 +18,7 @@
         <input type='hidden' name='id' value=<?=$id?>>
         <button>Save</button><br>
     </form>
-    <a href='index.php?c=article&id=<?=$id?>'>Cancel</a>
+    <a href=<?=BASE_URL . "article/$id"?>>Cancel</a>
 <?php else: ?>
     <?=$messageToUser?><br>
 <?php foreach($errors as $error):?>
@@ -26,4 +26,4 @@
 <?php endforeach;?>
 <?php endif;?>
 <hr>
-<a href="index.php">Move to main page</a>
+<a href=<?=BASE_URL . "/"?>>Move to main page</a>
