@@ -3,12 +3,10 @@ declare (strict_types = 1);
 
 $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    if (!checkId($_GET['id'])) {
-        header($_SERVER["SERVER_PROTOCOL"] . " 404 Not Found");
-        $pageTitle = "404 Error";
-        $pageContent = template("errors/v_404");
+    if (!checkId(PARAMS_URL['id'])) {
+        header('Location:' . BASE_URL . 'e404');
     } else {
-        $id = (int) $_GET['id'];
+        $id = (int) PARAMS_URL['id'];
     }
     if ($id <= 0) {
         $error = "Wrong id sent";

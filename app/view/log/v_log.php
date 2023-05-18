@@ -18,4 +18,4 @@
     <?php endforeach?>
 </table>
 <hr>
-<a href="index.php">Move to main page</a>
+<a href=<?=BASE_URL?>>Move to main page</a>

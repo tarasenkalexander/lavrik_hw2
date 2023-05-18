@@ -1,6 +1,6 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    $logfileName = $_GET['logfileName'];
+    $logfileName = PARAMS_URL['logfileName'];
     $logInformation = file("logs/$logfileName");
     $logInformationParsed = [];
 

@@ -1,20 +1,69 @@
 <?php
 final class Router
 {
-    //А почему они статические, это так нужно?
-    //Потом закрыть доступ к некоторыс переменным, зачем он всем?
+    //Потом закрыть доступ к некоторым переменным, зачем они всем?
     public static $routes = [];
-    public static $routingResult = []; //массив ['controller' => 'controllerName', params => ['id' ...] ]
+    public static $routingResult = [];
     public static $requestedUri = null;
 
     public function __construct($requestedUri)
     {
         self::$requestedUri = $requestedUri;
+        self::initRoutes();
+        self::$routingResult['controller'] = 'app/controller/e404';
     }
 
+    private static function initRoutes(): void
+    {
+        self::addRoutes([
+            [
+                'reg' => '~/~',
+                'controller' => 'articles/all',
+            ],
+            [
+                'reg' => '~add/?~',
+                'controller' => 'articles/add',
+            ],
+            [
+                'reg' => "~article/:num/?~",
+                'controller' => 'articles/article',
+                'params' => ['id' => 1],
+            ],
+            [
+                'reg' => "~article/:num/edit/?~",
+                'controller' => 'articles/edit',
+                'params' => ['id' => 1],
+            ],
+            [
+                'reg' => "~article/:num/delete/?~",
+                'controller' => 'articles/delete',
+                'params' => ['id' => 1],
+            ],
+            [
+                'reg' => "~logs/?~",
+                'controller' => 'logs/logs',
+            ],
+            [
+                'reg' => "~log/:any/?~",
+                'controller' => 'logs/log',
+                'params' => ['logfileName' => 1],
+            ],
+            [
+                'reg' => "~category/:num/?~",
+                'controller' => 'categories/articlesByCategory',
+                'params' => ['categoryId' => 1],
+            ],
+            [
+                'reg' => "~e404/?~",
+                'controller' => 'errors/e404',
+            ],
+        ]);
+    }
+
+    //Эта функция творит безумные вещи, надо подправить
     public static function deleteSlashUrl(string $url)
     {
-        $url = preg_replace("~/*~", '/', $url);
+        $url = preg_replace("~/+~", '/', $url);
 
         if ($url) {
             return $url;
@@ -40,14 +89,14 @@ final class Router
         return $url;
     }
 
-    private function parseRequestedUri(): void
+    private static function parseRequestedUri(): void
     {
         self::$requestedUri = self::cutBaseUrl(self::$requestedUri);
         self::$requestedUri = self::cutParamsUrl(self::$requestedUri);
-        self::$requestedUri = self::deleteSlashurl(self::$requestedUri);
+        self::$requestedUri = self::deleteSlashUrl(self::$requestedUri);
     }
 
-    public function addRoutes(array $routes)
+    public static function addRoutes(array $routes)
     {
         if (is_array($routes)) {
             self::$routes = array_merge($routes, self::$routes);
@@ -60,6 +109,7 @@ final class Router
     {
         $macros = [
             '~:num~' => '([1-9]+\d*)',
+            '~:any~' => '([aA-zZ0-9_-]+)',
         ];
         foreach ($macros as $key => $value) {
             $url = preg_replace($key, $value, $url);
@@ -68,7 +118,7 @@ final class Router
         return $url;
     }
 
-    public function dispatch()
+    public static function dispatch()
     {
         if (self::$requestedUri === null) {
             throw new Exception('Uri didn\'t set');
@@ -76,14 +126,13 @@ final class Router
         if (empty(self::$routes)) {
             throw new Exception('Routes didn\'t set');
         }
-        self::$routingResult['controller'] = 'e404';
-
         self::parseRequestedUri();
         $matches = [];
         foreach (self::$routes as $route) {
             $routePattern = self::bindUri($route['reg']);
-
             if (preg_match($routePattern, self::$requestedUri, $matches)) {
+                echo "pattern: " . $routePattern . "        requested: " . self::$requestedUri . "<br>";
+
                 self::$routingResult['controller'] = $route['controller'];
                 if (isset($route['params'])) {
                     foreach ($route['params'] as $name => $num) {

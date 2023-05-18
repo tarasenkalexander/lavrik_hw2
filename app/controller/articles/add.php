@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (empty($errors)) {
         addArticle($articleElements);
         logStandardInfo('added an article');
-        header("Location: index.php?c=article&id=" . getLastAddedId());
+        header("Location: article/" . getLastAddedId());
     }
 } else {
     logStandardInfo('entered on add page');

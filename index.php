@@ -1,81 +1,36 @@
 <?php
-
-include ("app/init.php");
-include ("app/core/router.php");
-
-// echo $_SERVER["REQUEST_URI"];
-// echo "<br>";
-// echo BASE_URL;
-$router = new Router($_GET['querysystemurl'] ?? '');
-
-$router->addRoutes([
-    [
-        'reg' => '~/?~',
-        'controller' => 'index.php'
-    ],
-    [
-        'reg' => '~add/?~',
-        'controller' => 'add'
-    ],
-    [
-        'reg' => "~article/:num/?~",
-        'controller' => 'article',
-        'params' => ['id' => 1]
-    ],
-    [
-        'reg' => "~article/:num/edit/?~",
-        'controller' => 'edit',
-        'params' => ['id' => 1]
-    ],
-    [
-        'reg' => "~article/:num/delete/?~",
-        'controller' => 'delete',
-        'params' => ['id' => 1]
-    ]
-
-]);
+include "app/init.php";
+include "app/core/router.php";
 
 $pageTitle = '';
 $pageContent = '';
 
+$router = new Router("/" . ($_GET['querysystemurl'] ?? ""));
 $router->dispatch();
 
-$controllerName = $router::$routingResult['controller'] ?? 'index';
+$controllerName = $router::$routingResult['controller'];
+if (isset($router::$routingResult['params'])) {
+    define('PARAMS_URL', $router::$routingResult['params']);
+}
 $controllerPath = "app/controller/$controllerName.php";
 
-if(file_exists($controllerPath))
-{
-    include($controllerPath);
-}
-else{
-    header($_SERVER["SERVER_PROTOCOL"] . " 404 Not Found");
-    $pageTitle = "404 Error";
-    $pageContent = template("errors/v_404");
+if (file_exists($controllerPath)) {
+    include $controllerPath;
+} else {
+    header('Location:' . BASE_URL . 'e404');
 }
 
-include ("app/view/base/v_main.php");
+include "app/view/base/v_main.php";
 
 
-/**
- * Я остановился на том, что у меня выбрасывает ошибку, когда я пытаюсь получить доступ к любой странице.
- * Я вспомнил, что нужно задать базовый контроллер-ошибку в dispatch, но понял, что не знаю, как этот
- * контроллер создать
+
+/*
+2. Можно удалить перенаправление на qsu через 
+RewriteRule . index.php 
+и обрабатывать запрос через $_SERVER['REQUEST_URI']
+3. Убрать двойные слеши 
+3.5. Убрать ввод любой фигни с заходом в Index.php
+ ^^ Это может решаться каноническими ссылками
+ На самом деле потестил на крупных страницах - много где это даже не правится, я бы забил. 
+ Только ради опыта поигрался бы с каноническими ссылками.
  */
-
-
-/**
- * Лаврика:
- * 2. Сделать красоту в проекте, бутстрап, добавить разметки для сложности
- *      Загуглить базовый гайд по бутстрапу, желательно с видео. Мне это пригодится в MLWS
- */
-
-
-/**
- * Моё:
- * 
- * 1. Бахнуть исключения
- * 2. Заменить template на Twig чисто для опыта
- * 3. Переделать getArticle в model: чтобы он сразу возвращал название категории, а то сейчас
- * ублюдская реализация
- */
-

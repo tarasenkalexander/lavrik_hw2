@@ -20,4 +20,4 @@
 	<a href=<?=BASE_URL . "add"?>>Add one more</a>
 <?php endif?>
 <hr>
-<a href=<?=BASE_URL . "/"?>>Move to main page</a>
+<a href=<?=BASE_URL?>>Move to main page</a>

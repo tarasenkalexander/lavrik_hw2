@@ -3,6 +3,7 @@ RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule .* index.php?querysystemurl=$0
 
+
 Options -Indexes
 
 <FilesMatch "\.(php|twig)">

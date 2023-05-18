@@ -8,15 +8,13 @@ $messageToUser = '';
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    if (!checkId($_GET['id'])) {
-        header($_SERVER["SERVER_PROTOCOL"] . " 404 Not Found");
-        $pageTitle = "404 Error";
-        $pageContent = template("errors/v_404");
+    if (!checkId(PARAMS_URL['id'])) {
+        header('Location:' . BASE_URL . 'e404');
     } else {
-        $id = (int) $_GET['id'];
+        $id = (int) PARAMS_URL['id'];
     }
     $article = getArticle($id);
-    if ($article !== null) {
+    if ($article) {
         $articleElements['title'] = $article['title'];
         $articleElements['content'] = $article['content'];
         $articleElements['category_id'] = $article['category_id'];
@@ -27,11 +25,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     logStandardInfo('entered to edit');
 } else {
     if (!checkId($_POST['id'])) {
-        header($_SERVER["SERVER_PROTOCOL"] . " 404 Not Found");
-        $pageTitle = "404 Error";
-        $pageContent = template("errors/v_404");
+        header('Location:' . BASE_URL . 'e404');
     } else {
-        $id = (int) $_GET['id'];
+        $id = (int) $_POST['id'];
     }
     $articleElements = getParticularElements($_POST, ['title', 'content', 'category_id']);
     clearArticleElements($articleElements);
