@@ -1,0 +1,13 @@
+{
+    "name": "alex307/lavrik_hw2-1",
+    "description": "test project for lavrik course",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Alex307\\LavrikHw21\\": "src/"
+        }
+    },
+    "require": {
+        "twig/twig": "^3.6"
+    }
+}

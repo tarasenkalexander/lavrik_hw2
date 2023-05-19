@@ -3,7 +3,7 @@
         <h1><?=$article['title']?></h1>
         <div><?=$article['content']?></div>
         <div>
-            <a href = <?=BASE_URL . "category/" . $article['category_id']?>>
+            <a href = <?=BASE_URL . "articles/" . $article['category_id']?>>
                 Category: <?=$categories[$article['category_id']]['name']?></a>
         </div>
         <hr>

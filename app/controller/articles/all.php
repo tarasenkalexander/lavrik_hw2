@@ -5,4 +5,4 @@ $articles = getArticles();
 logStandardInfo();
 
 $pageTitle = "All articles";
-$pageContent = template("article/v_all", ["articles" => $articles, "pageTitle" => $pageTitle]);
+$pageContent = template("article/v_articles_list", ["articles" => $articles, "pageTitle" => $pageTitle]);

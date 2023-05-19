@@ -15,6 +15,9 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href=<?=BASE_URL . "logs"?>>View logs</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href=<?=BASE_URL . "categories"?>>View categories</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -35,6 +38,9 @@
                 <?php endforeach;?>
             </div>
         </div>
+        <?php if(isset($moveToMain)): ?>
+            <?=$moveToMain?>
+        <?php endif;?>
     </section>
     <footer class="bg-footer fixed-bottom text-center">
         2023 &#169; Alex

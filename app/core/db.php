@@ -23,7 +23,7 @@ function getErrors(PDOStatement $query)
 {
     if ($query->errorInfo()[0] !== PDO::ERR_NONE) {
         $errors = $query->errorInfo();
-        include "view/errors/v_common_error.php";
+        header("Location: " . BASE_URL . "e500");
         exit();
     }
 

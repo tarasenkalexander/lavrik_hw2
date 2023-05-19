@@ -49,7 +49,7 @@ final class Router
                 'params' => ['logfileName' => 1],
             ],
             [
-                'reg' => "~category/:num/?~",
+                'reg' => "~articles/:num/?~",
                 'controller' => 'categories/articlesByCategory',
                 'params' => ['categoryId' => 1],
             ],
@@ -57,10 +57,30 @@ final class Router
                 'reg' => "~e404/?~",
                 'controller' => 'errors/e404',
             ],
-        ]);
+            [
+                'reg' => "~e505/?~",
+                'controller' => 'errors/e500'
+            ],
+            [
+                'reg' => "~category/:num/edit/?~",
+                'controller' => 'categories/edit',
+                'params' => ['categoryId' => 1],
+            ],
+            [
+                'reg' => "~category/:num/delete/?~",
+                'controller' => 'categories/delete',
+                'params' => ['categoryId' => 1],
+            ],
+            [
+                'reg' => "~category/add/?~",
+                'controller' => 'categories/add',
+            ],
+            [
+                'reg' => "~categories/?~",
+                'controller' => 'categories/all',
+            ]]);
     }
 
-    //Эта функция творит безумные вещи, надо подправить
     public static function deleteSlashUrl(string $url)
     {
         $url = preg_replace("~/+~", '/', $url);
@@ -131,8 +151,6 @@ final class Router
         foreach (self::$routes as $route) {
             $routePattern = self::bindUri($route['reg']);
             if (preg_match($routePattern, self::$requestedUri, $matches)) {
-                echo "pattern: " . $routePattern . "        requested: " . self::$requestedUri . "<br>";
-
                 self::$routingResult['controller'] = $route['controller'];
                 if (isset($route['params'])) {
                     foreach ($route['params'] as $name => $num) {

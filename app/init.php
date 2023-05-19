@@ -5,6 +5,8 @@ include 'model/article/articleDbConnection.php';
 include 'model/article/article.php';
 include 'model/category/categoryDbConnection.php';
 include 'core/logging.php';
+include 'app/core/router.php';
+require 'vendor/autoload.php';
 
 const BASE_URL = "/ma_projects/my_hw2/lavrik_hw2-1/";
 

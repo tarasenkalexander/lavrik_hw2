@@ -39,7 +39,6 @@ function removeArticle(int $id): bool
 
 function editArticle(int $id, array $newArticle): bool
 {
-
     $sql = "UPDATE articles
             SET title=:title, content=:content, category_id=:category_id
             WHERE id=$id";
