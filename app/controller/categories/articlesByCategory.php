@@ -5,7 +5,7 @@ $articlesByCategory = getArticlesByCategory($categoryId);
 $moveToMain = template("common/v_move_to_main", []);
 if (checkId($categoryId) && $articlesByCategory) {
 
-    $pageTitle = "Cats"; // тут бы получать название категории
+    $pageTitle = "Cats";
     $pageContent = template("article/v_articles_list", [
         "articles" => $articlesByCategory,
         "pageTitle" => $pageTitle,

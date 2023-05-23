@@ -4,6 +4,7 @@ include 'core/functions.php';
 include 'model/article/articleDbConnection.php';
 include 'model/article/article.php';
 include 'model/category/categoryDbConnection.php';
+include 'model/category/category.php';
 include 'core/logging.php';
 include 'app/core/router.php';
 require 'vendor/autoload.php';

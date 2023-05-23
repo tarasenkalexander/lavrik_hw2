@@ -27,9 +27,17 @@ function deleteCategory(int $id)
     return getErrors($query);
 }
 
+function deleteCategoryByName(string $name)
+{
+    $sql = "DELETE FROM categories WHERE name=:name";
+    $query = runSqlQuery($sql, ["name" => $name]);
+
+    return getErrors($query);
+}
+
 function addCategory(array $newCategory)
 {
-    $sql = "INSERT INTO categories(name) VALUES :name";
+    $sql = "INSERT INTO categories(name) VALUES (:name);";
     $query = runSqlQuery($sql, $newCategory);
 
     return getErrors($query);
