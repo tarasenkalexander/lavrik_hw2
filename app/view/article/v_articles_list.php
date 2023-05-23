@@ -10,7 +10,7 @@
                 <div class="collapse navbar-collapse">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href=<?=BASE_URL . "add"?>>Add article</a>
+                            <a class="nav-link active" aria-current="page" href=<?=BASE_URL . "article/add"?>>Add article</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href=<?=BASE_URL . "logs"?>>View logs</a>

@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $categories = getCategories();
 }
 
-$pageTitle = "Edit article";
+$pageTitle = "Add article";
 $pageContent = template("article/v_add", [
     "messageToUser" => $messageToUser,
     "articleElements" => $articleElements,

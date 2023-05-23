@@ -3,8 +3,7 @@ include "app/init.php";
 
 $pageTitle = '';
 $pageContent = '';
-$notForMain = ["categories/add", "categories/delete", "categories/edit"];
-
+$ajaxControllers = ["categories/add", "categories/delete", "categories/edit"];
 $router = new Router("/" . ($_GET['querysystemurl'] ?? ""));
 $router->dispatch();
 
@@ -19,86 +18,6 @@ if (file_exists($controllerPath)) {
 } else {
     header('Location:' . BASE_URL . 'e404');
 }
-if (!in_array($controllerName, $notForMain)) {
+if (!in_array($controllerName, $ajaxControllers)) {
     include "app/view/base/v_main.php";
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-2. Можно удалить перенаправление на qsu через
-RewriteRule . index.php
-и обрабатывать запрос через $_SERVER['REQUEST_URI']
-3. Убрать двойные слеши
-3.5. Убрать ввод любой фигни с заходом в Index.php
-^^ Это может решаться каноническими ссылками
-На самом деле потестил на крупных страницах - много где это даже не правится, я бы забил.
-Только ради опыта поигрался бы с каноническими ссылками.
-4. Сравнить свой роутер с роутером с сайта https://qna.habr.com/q/178365
-
-5. Выводить название категории на странице статей по категории
-6. v_article - убрать подчёркивание $id
-7. Отрефакторить проект. v_articles_list - убрать bg-main с общего div
-8. Можно ли создавать категории с одинаковыми именами?
-9. Как передавать текст ошибки на страницу через header (или без него)
- */

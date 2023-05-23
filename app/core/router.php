@@ -17,66 +17,66 @@ final class Router
     {
         self::addRoutes([
             [
-                'reg' => '~/~',
+                'reg' => '~^/?$~',
                 'controller' => 'articles/all',
             ],
             [
-                'reg' => '~add/?~',
+                'reg' => '~^/?article/add/?$~',
                 'controller' => 'articles/add',
             ],
             [
-                'reg' => "~article/:num/?~",
+                'reg' => "~^/?article/:num/?$~",
                 'controller' => 'articles/article',
                 'params' => ['id' => 1],
             ],
             [
-                'reg' => "~article/:num/edit/?~",
+                'reg' => "~^/?article/:num/edit/?$~",
                 'controller' => 'articles/edit',
                 'params' => ['id' => 1],
             ],
             [
-                'reg' => "~article/:num/delete/?~",
+                'reg' => "~^/?article/:num/delete/?$~",
                 'controller' => 'articles/delete',
                 'params' => ['id' => 1],
             ],
             [
-                'reg' => "~logs/?~",
+                'reg' => "~^/?logs/?$~",
                 'controller' => 'logs/logs',
             ],
             [
-                'reg' => "~log/:any/?~",
+                'reg' => "~^/?log/:any/?$~",
                 'controller' => 'logs/log',
                 'params' => ['logfileName' => 1],
             ],
             [
-                'reg' => "~articles/:num/?~",
+                'reg' => "~^/?articles/:num/?$~",
                 'controller' => 'categories/articlesByCategory',
                 'params' => ['categoryId' => 1],
             ],
             [
-                'reg' => "~e404/?~",
+                'reg' => "~^/?e404/?$~",
                 'controller' => 'errors/e404',
             ],
             [
-                'reg' => "~e505/?~",
+                'reg' => "~^/?e505/?$~",
                 'controller' => 'errors/e500'
             ],
             [
-                'reg' => "~category/:num/edit/?~",
+                'reg' => "~^/?category/:num/edit/?$~",
                 'controller' => 'categories/edit',
                 'params' => ['categoryId' => 1],
             ],
             [
-                'reg' => "~category/:num/delete/?~",
+                'reg' => "~^/?category/:num/delete/?$~",
                 'controller' => 'categories/delete',
                 'params' => ['categoryId' => 1],
             ],
             [
-                'reg' => "~category/add/?~",
+                'reg' => "~^/?category/add/?$~",
                 'controller' => 'categories/add',
             ],
             [
-                'reg' => "~categories/?~",
+                'reg' => "~^/?categories/?$~",
                 'controller' => 'categories/all',
             ]]);
     }
