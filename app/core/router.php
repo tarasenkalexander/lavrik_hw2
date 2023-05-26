@@ -78,7 +78,12 @@ final class Router
             [
                 'reg' => "~^/?categories/?$~",
                 'controller' => 'categories/all',
-            ]]);
+            ],
+            [
+                'reg' => "~^/?login/?$~",
+                'controller' => 'auth/login',
+            ]
+        ]);
     }
 
     public static function deleteSlashUrl(string $url)

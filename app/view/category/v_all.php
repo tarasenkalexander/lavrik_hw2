@@ -1,6 +1,3 @@
-<header class="text-center mb-3">
-    <h1><?=$pageTitle?></h1>
-</header>
 <main>
     <div class="container">
         <table class="table">

@@ -3,8 +3,8 @@
     --color2:#ddd;
 }
 
-.bg-main{
-    background-color: var(--color1);
+.bg-main {
+    background-color: #000;
 }
 
 .bg-footer{
