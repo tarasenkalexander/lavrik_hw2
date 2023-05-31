@@ -1,5 +1,20 @@
 <?php
-include "app/init.php";
+include "src/init.php";
+
+session_start();
+
+$token = $_SESSION['token'] ?? $_COOKIE['token'] ?? null;
+// echo "Cook: ";
+// var_dump( $_COOKIE['token']);
+// echo "<hr>";
+// echo "Sess: ";
+// var_dump( $_SESSION['token']);
+// echo "<hr>";
+
+$user = $token ? getAuthUser($token) : null;
+// echo "<hr>";
+// echo "<hr>";
+// var_dump($user);
 
 $pageTitle = '';
 $pageContent = '';
@@ -11,7 +26,7 @@ $controllerName = $router::$routingResult['controller'];
 if (isset($router::$routingResult['params'])) {
     define('PARAMS_URL', $router::$routingResult['params']);
 }
-$controllerPath = "app/controller/$controllerName.php";
+$controllerPath = "src/controller/$controllerName.php";
 
 if (file_exists($controllerPath)) {
     include $controllerPath;
@@ -19,5 +34,5 @@ if (file_exists($controllerPath)) {
     header('Location:' . BASE_URL . 'e404');
 }
 if (!in_array($controllerName, $ajaxControllers)) {
-    include "app/view/base/v_main.php";
+    include "src/view/base/v_main.php";
 }

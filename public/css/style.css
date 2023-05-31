@@ -3,8 +3,12 @@
     --color2:#ddd;
 }
 
+main {
+  min-height: 90%;
+}
+
 .bg-main {
-    background-color: #000;
+    background-color: var(--color1);
 }
 
 .bg-footer{
@@ -16,5 +20,10 @@
 }
 
 .full-size{
-    height: 100vh;
+    min-height: 100vh;
+}
+
+footer{
+    
+  flex: 0 0 auto;
 }
