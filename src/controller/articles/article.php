@@ -26,4 +26,5 @@ if ($hasPost) {
     ]);
 } else {
     header('Location:' . BASE_URL . 'e404');
+    exit();
 }

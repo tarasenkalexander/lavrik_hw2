@@ -3,6 +3,7 @@ declare (strict_types = 1);
 
 if ($user === null) {
     header('Location: ' . BASE_URL . 'login');
+    exit();
 }
 
 $categories = getCategories();
@@ -26,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 } else {
     if (!checkId($_POST['id'])) {
         header('Location:' . BASE_URL . 'e404');
+        exit();
     } else {
         $id = (int) $_POST['id'];
     }

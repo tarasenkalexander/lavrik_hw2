@@ -4,6 +4,7 @@ declare (strict_types = 1);
 if($user === null)
 {
     header('Location: ' . BASE_URL . 'login');
+    exit();
 }
 
 $messageToUser = '';

@@ -32,6 +32,7 @@ if (file_exists($controllerPath)) {
     include $controllerPath;
 } else {
     header('Location:' . BASE_URL . 'e404');
+    exit();
 }
 if (!in_array($controllerName, $ajaxControllers)) {
     include "src/view/base/v_main.php";

@@ -9,7 +9,3 @@ if($user !== null){
 
 header("Location: " . BASE_URL);
 
-    // var_dump($_COOKIE);
-    // echo "<br>";
-    // var_dump($_SESSION);
-

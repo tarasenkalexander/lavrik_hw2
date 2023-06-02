@@ -13,4 +13,5 @@ if (checkId($categoryId) && $articlesByCategory) {
     ]);
 } else {
     header('Location:' . BASE_URL . 'e404');
+    exit();
 }
